@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
-public class SnakeHeadView : NetworkBehaviour
+public class RatView : NetworkBehaviour
 {
     public NetworkVariable<Vector3> targetPosition = new(new Vector3(0, 0, 0), NetworkVariableReadPermission.Everyone,
      NetworkVariableWritePermission.Server);
@@ -23,26 +23,21 @@ public class SnakeHeadView : NetworkBehaviour
     void Update()
     {
         bool targetSeen = false;
-        //Vector3 leftRay = Quaternion.Euler(0, 0, -45) * transform.right;
-        //Vector3 rightRay = Quaternion.Euler(0, 0, 45) * transform.right;
-        for (int angle = -45; angle <= 45; angle++)
+        for (int angle = -90; angle <= 90; angle++)
         {
-
             Vector3 ray = Quaternion.Euler(0, 0, angle) * transform.right;
-            LayerMask mask = LayerMask.GetMask("RatLayer");
+            LayerMask mask = LayerMask.GetMask("SnakeLayer");
             RaycastHit2D hit = Physics2D.Raycast(transform.position, ray, 4f, mask);
-            Debug.DrawRay(transform.position, ray * 4, new Color(255, 0, 0, 0.10f));  //Rysuje radar
-            //Debug.DrawRay(transform.position, leftRay * 4, Color.red);
-            //Debug.DrawRay(transform.position, rightRay * 4, Color.red);
+            Debug.DrawRay(transform.position, ray * 4, new Color(0, 0, 255, 0.10f));  //Rysuje radar
             if (hit.collider != null)
             {
-                if (hit.collider.tag == "Rat")
+                if (hit.collider.tag == "Player")
                 {
-                    targetSeen = true;
                     hasTarget = true;
+                    targetSeen = true;
                     if (IsServer)
                     {
-                        targetPosition.Value = hit.collider.transform.position;
+                        targetPosition.Value = -4 * (hit.collider.transform.position - transform.position);
                     }
                 }
             }

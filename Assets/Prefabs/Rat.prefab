@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 1636660801506325340}
   - component: {fileID: 1636660801506325336}
   - component: {fileID: 1636660801506325339}
-  m_Layer: 3
+  - component: {fileID: 7725616979125719478}
+  m_Layer: 6
   m_Name: Rat
   m_TagString: Rat
   m_Icon: {fileID: 0}
@@ -175,5 +176,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14693fb0fca1d942bb2d4e36bc4f5d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snakeSeen:
+    m_InternalValue: 0
   turnSpeed: 400
-  speed: 1
+  speed: 1.8
+--- !u!114 &7725616979125719478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636660801506325341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a79372d1dc0bbc4c85b45fdd77d5aa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPosition:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  hasTarget: 0

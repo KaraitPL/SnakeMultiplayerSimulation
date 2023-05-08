@@ -11,14 +11,14 @@ public class PlayerController : NetworkBehaviour
 
     Vector3 wayPoint;
     [SerializeField] float turnSpeed = 200;
-    [SerializeField] float speed = 2;
+    [SerializeField] float speed = 0;
 
     SnakeHeadView snakeHeadView;
     //private bool seekTarget = false;
 
 
     private void Awake()
-    {   
+    {
         snakeHeadView = GetComponent<SnakeHeadView>();
         SetNewDestination();
     }
@@ -32,19 +32,19 @@ public class PlayerController : NetworkBehaviour
     {
         if (snakeHeadView.hasTarget == true && IsServer)
             seekTarget.Value = true;
-        SnakeMovement();          
+        SnakeMovement();
     }
 
     private void SnakeMovement()
     {
-        
+
         if (seekTarget.Value == true)
         {
-            Debug.Log("Seek");
+            //Debug.Log("Seek");
             Vector3 destination = snakeHeadView.targetPosition.Value - transform.position;
             if (destination.magnitude < 0.5)
             {
-                if(IsServer)
+                if (IsServer)
                     seekTarget.Value = false;
                 destination = Vector3.zero;
             }
@@ -57,18 +57,15 @@ public class PlayerController : NetworkBehaviour
 
             destination.Normalize();
             transform.position += destination * speed * Time.deltaTime;
-
-
-
         }
         else
         {
-            Debug.Log("Default");
+            //Debug.Log("Default");
             Vector3 destination = wayPoint - transform.position;
             if (destination.magnitude < 0.3)
             {
                 SetNewDestination();
-                Debug.Log("New Destination");
+                //Debug.Log("New Destination");
             }
             Vector3 direction = wayPoint - transform.position;
             float angle1 = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -84,7 +81,6 @@ public class PlayerController : NetworkBehaviour
             {
                 transform.rotation = Quaternion.Euler(0f, 0f, angle1);
             }
-
             transform.position += transform.right * speed * Time.deltaTime;
         }
     }
@@ -92,7 +88,7 @@ public class PlayerController : NetworkBehaviour
 
     void SetNewDestination()
     {
-        wayPoint = new Vector3(Random.Range(-5,5), Random.Range(-5, 5), 0);
+        wayPoint = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
 
     }
 }
