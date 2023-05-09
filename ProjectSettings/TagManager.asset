@@ -12,8 +12,8 @@ TagManager:
   - TargetObjects
   - Water
   - UI
-  - 
-  - 
+  - RatLayer
+  - SnakeLayer
   - 
   - 
   - 
