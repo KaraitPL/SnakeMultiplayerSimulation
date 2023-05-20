@@ -200,4 +200,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPosition:
     m_InternalValue: {x: 0, y: 0, z: 0}
+  playerSetupUI: {fileID: 8821820884321633936, guid: fde63821f445a214d80aee72317cef6b, type: 3}
   hasTarget: 1

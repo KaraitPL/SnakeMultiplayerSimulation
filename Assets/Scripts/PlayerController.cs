@@ -10,6 +10,8 @@ public class PlayerController : NetworkBehaviour
         NetworkVariableWritePermission.Server);
 
     Vector3 wayPoint;
+    Vector3 oldWayPoint;
+    Vector3 newWayPoint;
     [SerializeField] float turnSpeed = 200;
     [SerializeField] float speed = 0;
 
@@ -20,7 +22,7 @@ public class PlayerController : NetworkBehaviour
     private void Awake()
     {
         snakeHeadView = GetComponent<SnakeHeadView>();
-        SetNewDestination();
+        wayPoint = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
     }
 
     public override void OnNetworkSpawn()
@@ -88,7 +90,16 @@ public class PlayerController : NetworkBehaviour
 
     void SetNewDestination()
     {
-        wayPoint = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
+        oldWayPoint = wayPoint;
+        newWayPoint = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
+        float distance = Vector3.Distance(oldWayPoint, newWayPoint);
+        while(distance < 2)
+        {
+            newWayPoint = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
+            distance = Vector3.Distance(oldWayPoint, newWayPoint);
+        }
+        wayPoint = newWayPoint;
+        
 
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
@@ -11,6 +12,8 @@ public class SnakeHeadView : NetworkBehaviour
 {
     public NetworkVariable<Vector3> targetPosition = new(new Vector3(0, 0, 0), NetworkVariableReadPermission.Everyone,
      NetworkVariableWritePermission.Server);
+    //public GameObject playerSetupUI;
+    //private PlayerSetup playerSetup;
 
     public bool hasTarget = false;
 
@@ -29,9 +32,12 @@ public class SnakeHeadView : NetworkBehaviour
         {
 
             Vector3 ray = Quaternion.Euler(0, 0, angle) * transform.right;
+            Vector3 rayTarget = transform.right;
             LayerMask mask = LayerMask.GetMask("RatLayer");
             RaycastHit2D hit = Physics2D.Raycast(transform.position, ray, 4f, mask);
+            RaycastHit2D hitTarget = Physics2D.Raycast(transform.position, rayTarget, 0.5f, mask);
             Debug.DrawRay(transform.position, ray * 4, new Color(255, 0, 0, 0.10f));  //Rysuje radar
+            Debug.DrawRay(transform.position, rayTarget * 0.5f, new Color(0, 255, 0, 1f));
             //Debug.DrawRay(transform.position, leftRay * 4, Color.red);
             //Debug.DrawRay(transform.position, rightRay * 4, Color.red);
             if (hit.collider != null)
@@ -46,6 +52,17 @@ public class SnakeHeadView : NetworkBehaviour
                     }
                 }
             }
+
+            if (hitTarget.collider != null)
+            {
+                if (hitTarget.collider.tag == "Rat")
+                {
+                    if(IsServer)
+                        Destroy(hitTarget.collider.gameObject);
+                    
+                    //playerSetup.GetComponent<PlayerSetup>().SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 2);
+                }
+            }
         }
         if (targetSeen == false)
         {
@@ -54,4 +71,5 @@ public class SnakeHeadView : NetworkBehaviour
 
 
     }
+
 }

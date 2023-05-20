@@ -12,10 +12,13 @@ public class RatView : NetworkBehaviour
     public NetworkVariable<Vector3> targetPosition = new(new Vector3(0, 0, 0), NetworkVariableReadPermission.Everyone,
      NetworkVariableWritePermission.Server);
 
+    RatController controller;
+
     public bool hasTarget = false;
 
     private void Awake()
     {
+        controller = GetComponent<RatController>();
         targetPosition.Value = transform.position;
     }
 
@@ -37,7 +40,8 @@ public class RatView : NetworkBehaviour
                     targetSeen = true;
                     if (IsServer)
                     {
-                        targetPosition.Value = -4 * (hit.collider.transform.position - transform.position);
+                        targetPosition.Value = -2 * (hit.collider.transform.position - transform.position);
+                        controller.SetNewDestination();
                     }
                 }
             }

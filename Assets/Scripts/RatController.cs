@@ -18,6 +18,11 @@ public class RatController : NetworkBehaviour
         SetNewDestination();
     }
 
+    public override void OnNetworkSpawn()
+    {
+        transform.position = new Vector3(Random.RandomRange(-5, 5), Random.RandomRange(-5, 5), 0);
+    }
+
     private void Update()
     {
         if (ratView.hasTarget == true && IsServer)
@@ -70,9 +75,10 @@ public class RatController : NetworkBehaviour
             transform.position += transform.right * speed * Time.deltaTime;
         }
     }
-    void SetNewDestination()
+    public void SetNewDestination()
     {
         wayPoint = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
 
     }
+
 }

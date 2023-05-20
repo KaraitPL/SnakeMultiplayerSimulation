@@ -22,9 +22,20 @@ public class PlayerSetup : NetworkBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
-            SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 1);
+            SpawnSnake();
         else if (Input.GetKeyDown(KeyCode.S))
-            SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 2);
+            SpawnRat();
+        
+    }
+
+    public void SpawnRat()
+    {        
+        SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 2);
+    }
+
+    public void SpawnSnake()
+    {
+        SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 1);
     }
 }
 
