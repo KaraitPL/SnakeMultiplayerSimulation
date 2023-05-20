@@ -5,6 +5,7 @@ public class PlayerSetup : NetworkBehaviour
 {
     [SerializeField] private GameObject playerPrefabA; //add prefab in inspector
     [SerializeField] private GameObject playerPrefabB; //add prefab in inspector
+    [SerializeField] private GameObject playerPrefabC; //add prefab in inspector
     NetworkObject netObj;
     [ServerRpc(RequireOwnership = false)] //server owns this object but client can request a spawn
     public void SpawnPlayerServerRpc(ulong clientId, int prefabId)
@@ -12,8 +13,10 @@ public class PlayerSetup : NetworkBehaviour
         GameObject newPlayer;
         if (prefabId == 1)
             newPlayer = (GameObject)Instantiate(playerPrefabA);
-        else
+        else if (prefabId == 2)
             newPlayer = (GameObject)Instantiate(playerPrefabB);
+        else 
+            newPlayer = (GameObject)Instantiate(playerPrefabC);
         netObj = newPlayer.GetComponent<NetworkObject>();
         newPlayer.SetActive(true);
         netObj.SpawnAsPlayerObject(clientId, true);
@@ -25,7 +28,13 @@ public class PlayerSetup : NetworkBehaviour
             SpawnSnake();
         else if (Input.GetKeyDown(KeyCode.S))
             SpawnRat();
+        else if (Input.GetKeyDown(KeyCode.C))
+            SpawnCheese();
         
+    }
+    public void SpawnSnake()
+    {
+        SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 1);
     }
 
     public void SpawnRat()
@@ -33,9 +42,9 @@ public class PlayerSetup : NetworkBehaviour
         SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 2);
     }
 
-    public void SpawnSnake()
+    public void SpawnCheese()
     {
-        SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 1);
+        SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 3);
     }
 }
 

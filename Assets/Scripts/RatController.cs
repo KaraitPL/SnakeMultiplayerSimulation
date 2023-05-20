@@ -52,12 +52,24 @@ public class RatController : NetworkBehaviour
         }
         else
         {
-            Vector3 destination = wayPoint - transform.position;
-            if (destination.magnitude < 0.3)
+            Vector3 destination;
+            Vector3 direction;
+            if (ratView.cheeseSpotted) 
             {
-                SetNewDestination();
+                destination = ratView.targetPosition.Value;
+                direction = transform.position;
             }
-            Vector3 direction = wayPoint - transform.position;
+            else 
+            {
+                destination = wayPoint - transform.position;
+                if (destination.magnitude < 0.3)
+                {
+                    SetNewDestination();
+                }
+                direction = wayPoint - transform.position;
+
+            }
+
             float angle1 = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             float tolerance = 5f;
             float bodyAngle = transform.eulerAngles.z;

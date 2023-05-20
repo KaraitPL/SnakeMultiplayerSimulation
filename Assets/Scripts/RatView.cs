@@ -15,6 +15,7 @@ public class RatView : NetworkBehaviour
     RatController controller;
 
     public bool hasTarget = false;
+    public bool cheeseSpotted = false;
 
     private void Awake()
     {
@@ -43,6 +44,13 @@ public class RatView : NetworkBehaviour
                         targetPosition.Value = -2 * (hit.collider.transform.position - transform.position);
                         controller.SetNewDestination();
                     }
+                }
+                if (hit.collider.tag == "Cheese" )
+                {
+                    cheeseSpotted = true;
+                    Debug.Log("SERRR");
+                    targetPosition.Value = hit.collider.transform.position;
+                    controller.SetNewDestination();
                 }
             }
         }
