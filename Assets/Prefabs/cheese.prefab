@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 1044125638568633810}
   - component: {fileID: 5860030871345403006}
   - component: {fileID: 8228275818684785065}
-  - component: {fileID: -8967275140551323702}
-  - component: {fileID: 658554079438675679}
   - component: {fileID: -8395436743021401380}
+  - component: {fileID: 2793717911274279456}
   m_Layer: 8
   m_Name: cheese
   m_TagString: Cheese
@@ -107,30 +106,6 @@ MonoBehaviour:
   SceneMigrationSynchronization: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &-8967275140551323702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7739482684762102170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e45fd3ade3065604390c624bd804c14b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &658554079438675679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7739482684762102170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cffb1794e19bde49ac6e6aff89943f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &-8395436743021401380
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -144,3 +119,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 26.38, y: 24.5, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2793717911274279456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7739482684762102170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
+  SyncRotAngleZ: 0
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0

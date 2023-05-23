@@ -28,8 +28,8 @@ public class PlayerSetup : NetworkBehaviour
             SpawnSnake();
         else if (Input.GetKeyDown(KeyCode.S))
             SpawnRat();
-        else if (Input.GetKeyDown(KeyCode.C))
-            SpawnCheese();
+        //else if (Input.GetKeyDown(KeyCode.C))
+           // SpawnCheese();
         
     }
     public void SpawnSnake()
@@ -42,9 +42,9 @@ public class PlayerSetup : NetworkBehaviour
         SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 2);
     }
 
-    public void SpawnCheese()
-    {
-        SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 3);
-    }
+    //public void SpawnCheese()
+    //{
+    //    SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 3);
+    //}
 }
 
