@@ -28,6 +28,7 @@ public class SnakeHeadView : NetworkBehaviour
         bool targetSeen = false;
         //Vector3 leftRay = Quaternion.Euler(0, 0, -45) * transform.right;
         //Vector3 rightRay = Quaternion.Euler(0, 0, 45) * transform.right;
+        float minRatDistance = 100000f;
         for (int angle = -45; angle <= 45; angle++)
         {
 
@@ -48,7 +49,12 @@ public class SnakeHeadView : NetworkBehaviour
                     hasTarget = true;
                     if (IsServer)
                     {
-                        targetPosition.Value = hit.collider.transform.position;
+                        float ratDistance = Vector3.Distance(hit.collider.transform.position, transform.position);
+                        if (ratDistance < minRatDistance)
+                        {
+                            minRatDistance = ratDistance;
+                            targetPosition.Value = hit.collider.transform.position;
+                        }
                     }
                 }
             }

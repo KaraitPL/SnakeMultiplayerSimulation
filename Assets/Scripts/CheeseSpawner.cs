@@ -10,7 +10,7 @@ public class CheeseSpawner : NetworkBehaviour
     {
             if (Input.GetKeyDown(KeyCode.C))
             {
-                Vector3 position = new Vector3(Random.RandomRange(-5, 5), Random.RandomRange(-5, 5), 0);
+                Vector3 position = new Vector3(Random.Range(-20, 20), Random.Range(-10, 10), 0);
                 GameObject cheese = Instantiate(cheesePrefab, position, transform.rotation);
                 cheese.GetComponent<NetworkObject>().Spawn();
             }

@@ -26,21 +26,24 @@ public class RatView : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        float minCheeseDistance = 10000f;
         bool targetSeen = false;
         for (int angle = -90; angle <= 90; angle++)
         {
             Vector3 ray = Quaternion.Euler(0, 0, angle) * transform.right;
+            Vector3 rayTarget = transform.right;
             LayerMask mask = LayerMask.GetMask("SnakeLayer") | LayerMask.GetMask("CheeseLayer");
             RaycastHit2D hit = Physics2D.Raycast(transform.position, ray, 4f, mask);
-            Debug.DrawRay(transform.position, ray * 4, new Color(0, 0, 255, 0.10f));  //Rysuje radar
+            //Debug.DrawRay(transform.position, ray * 4, new Color(0, 0, 255, 0.10f));  //Rysuje radar
+
+            RaycastHit2D hitTarget = Physics2D.Raycast(transform.position, rayTarget, 0.5f, LayerMask.GetMask("CheeseLayer")); //Ray do zjadania sera (krótki)
+
             if (hit.collider != null)
             {
-                Debug.Log("Hit");
                 if (hit.collider.tag == "Player")
                 {
                     hasTarget = true;
                     targetSeen = true;
-                    Debug.Log("RUN");
                     if (IsServer)
                     {
                         targetPosition.Value = -2 * (hit.collider.transform.position - transform.position);
@@ -49,11 +52,27 @@ public class RatView : NetworkBehaviour
                 }
                 else if (hit.collider.tag == "Cheese")
                 {
-                    //cheeseSpotted = true;
-                    //targetSeen = true;
-                    Debug.Log("SERRR");
-                    //targetPosition.Value = hit.collider.transform.position;
-                    //controller.SetNewDestination();
+                    hasTarget = true;
+                    targetSeen = true;  
+                    if (IsServer)
+                    {
+                        float cheeseDistance = Vector3.Distance(hit.collider.transform.position, transform.position);
+                        if (cheeseDistance < minCheeseDistance)
+                        {
+                            minCheeseDistance = cheeseDistance;
+                            targetPosition.Value = hit.collider.transform.position;
+                        }
+                    }
+                }
+                
+            }
+
+            if (hitTarget.collider != null) //Zjadanie sera
+            {
+                if (hitTarget.collider.tag == "Cheese")
+                {
+                    if (IsServer)
+                        hitTarget.collider.GetComponent<RespawnCheese>().DestroyAndSpawn();
                 }
             }
         }

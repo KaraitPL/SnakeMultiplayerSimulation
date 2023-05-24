@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: -6523615308798463452}
   - component: {fileID: 6113376491291312342}
   - component: {fileID: -6790515799177870692}
-  - component: {fileID: -8719647151814339452}
   - component: {fileID: -5155563475898611440}
+  - component: {fileID: 3810161033436307975}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -170,22 +170,6 @@ MonoBehaviour:
   tailPrefab: {fileID: 4171613951224203389, guid: 36da8bf26624b3349b7496c630e6a40a, type: 3}
   length:
     m_InternalValue: 6
---- !u!58 &-8719647151814339452
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27856129085413006}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &-5155563475898611440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,5 +184,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPosition:
     m_InternalValue: {x: 0, y: 0, z: 0}
-  playerSetupUI: {fileID: 8821820884321633936, guid: fde63821f445a214d80aee72317cef6b, type: 3}
   hasTarget: 1
+--- !u!70 &3810161033436307975
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27856129085413006}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.07319782, y: 0.0048797224}
+  m_Size: {x: 0.7755293, y: 0.63889563}
+  m_Direction: 1

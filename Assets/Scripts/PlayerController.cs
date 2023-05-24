@@ -22,12 +22,12 @@ public class PlayerController : NetworkBehaviour
     private void Awake()
     {
         snakeHeadView = GetComponent<SnakeHeadView>();
-        wayPoint = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
+        wayPoint = new Vector3(Random.Range(-20, 20), Random.Range(-10, 10), 0);
     }
 
     public override void OnNetworkSpawn()
     {
-        transform.position = new Vector3(Random.RandomRange(-5, 5), Random.RandomRange(-5, 5), 0);
+        transform.position = new Vector3(Random.Range(-20, 20), Random.Range(-10, 10), 0);
     }
 
     private void Update()
@@ -91,11 +91,11 @@ public class PlayerController : NetworkBehaviour
     void SetNewDestination()
     {
         oldWayPoint = wayPoint;
-        newWayPoint = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
+        newWayPoint = new Vector3(Random.Range(-20, 20), Random.Range(-10, 10), 0);
         float distance = Vector3.Distance(oldWayPoint, newWayPoint);
         while(distance < 2)
         {
-            newWayPoint = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
+            newWayPoint = new Vector3(Random.Range(-20, 20), Random.Range(-10, 10), 0);
             distance = Vector3.Distance(oldWayPoint, newWayPoint);
         }
         wayPoint = newWayPoint;
