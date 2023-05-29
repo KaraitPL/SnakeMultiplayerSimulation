@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -3901163992310086940}
   - component: {fileID: 3228089325012788850}
   - component: {fileID: 341523914784804195}
+  - component: {fileID: 6740873960676639388}
   m_Layer: 6
   m_Name: Rat
   m_TagString: Rat
@@ -79,9 +80,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1031318581
   m_SortingLayer: 2
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b87b423fc7174524f814820dc68fe34f, type: 3}
-  m_Color: {r: 0.5283019, g: 0.4754717, b: 0.37579212, a: 1}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: ed0642abbac428943bff801eebf9f416, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -222,3 +223,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6740873960676639388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6454784608819902676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c213b88b603681047b5aca5d5482bcc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holeA: {fileID: 5408617051140302392, guid: 7de6cc1708c24a7409a92e8b523476be, type: 3}
+  holeB: {fileID: 869766091746478080, guid: 0230d75190e6e68439227243e912bdcf, type: 3}
+  holeC: {fileID: 3110975499273655187, guid: 881f2c23326df0840882f51dd65f81dc, type: 3}

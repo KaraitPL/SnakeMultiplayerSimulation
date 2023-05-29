@@ -44,12 +44,12 @@ public class RatView : NetworkBehaviour
                 if (hit.collider.tag == "Player")
                 {
                     if(run == false)
-                        //StartCoroutine(TurnOnRunGForFewSeconds());
+                        StartCoroutine(TurnOnRunForFewSeconds());
                     hasTarget = true;
                     targetSeen = true;
                     if (IsServer)
                     {
-                        targetPosition.Value = -2 * (hit.collider.transform.position - transform.position);
+                        targetPosition.Value = transform.position - 2 * (hit.collider.transform.position - transform.position);
                         controller.SetNewDestination();
                     }
                 }
@@ -87,7 +87,7 @@ public class RatView : NetworkBehaviour
 
     }
 
-    IEnumerator TurnOnRunGForFewSeconds()
+    IEnumerator TurnOnRunForFewSeconds()
     {
         run = true;
         yield return new WaitForSeconds(3);

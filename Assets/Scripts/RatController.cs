@@ -64,7 +64,7 @@ public class RatController : NetworkBehaviour
             {
                 if (IsServer)
                     snakeSeen.Value = false;
-                destination = Vector3.zero;
+                //destination = Vector3.zero;
             }
             Vector3 direction = ratView.targetPosition.Value - transform.position;
             float angle1 = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

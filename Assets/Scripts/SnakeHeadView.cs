@@ -63,8 +63,10 @@ public class SnakeHeadView : NetworkBehaviour
             {
                 if (hitTarget.collider.tag == "Rat")
                 {
-                    if(IsServer)
-                        Destroy(hitTarget.collider.gameObject);
+                        RatRespawn ratRespawn = hitTarget.collider.GetComponent<RatRespawn>();
+                        ratRespawn.MakeRespawnAction();
+                    
+                        
                     
                     //playerSetup.GetComponent<PlayerSetup>().SpawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId, 2);
                 }
