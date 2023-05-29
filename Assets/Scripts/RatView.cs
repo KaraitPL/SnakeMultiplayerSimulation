@@ -16,6 +16,7 @@ public class RatView : NetworkBehaviour
 
     public bool hasTarget = false;
     public bool cheeseSpotted = false;
+    public bool run = false;
 
     private void Awake()
     {
@@ -42,6 +43,8 @@ public class RatView : NetworkBehaviour
             {
                 if (hit.collider.tag == "Player")
                 {
+                    if(run == false)
+                        //StartCoroutine(TurnOnRunGForFewSeconds());
                     hasTarget = true;
                     targetSeen = true;
                     if (IsServer)
@@ -50,7 +53,7 @@ public class RatView : NetworkBehaviour
                         controller.SetNewDestination();
                     }
                 }
-                else if (hit.collider.tag == "Cheese")
+                else if (hit.collider.tag == "Cheese" && run == false)
                 {
                     hasTarget = true;
                     targetSeen = true;  
@@ -82,5 +85,12 @@ public class RatView : NetworkBehaviour
         }
 
 
+    }
+
+    IEnumerator TurnOnRunGForFewSeconds()
+    {
+        run = true;
+        yield return new WaitForSeconds(3);
+        run = false;
     }
 }

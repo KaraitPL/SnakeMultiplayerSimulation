@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 5580612944125488371}
   - component: {fileID: 8908610742882930478}
   - component: {fileID: -3901163992310086940}
-  - component: {fileID: 2178769682169725733}
+  - component: {fileID: 3228089325012788850}
+  - component: {fileID: 341523914784804195}
   m_Layer: 6
   m_Name: Rat
   m_TagString: Rat
@@ -141,6 +142,7 @@ MonoBehaviour:
     m_InternalValue: {x: 0, y: 0, z: 0}
   hasTarget: 0
   cheeseSpotted: 0
+  run: 0
 --- !u!70 &8908610742882930478
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -171,7 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SyncPositionX: 1
   SyncPositionY: 1
-  SyncPositionZ: 0
+  SyncPositionZ: 1
   SyncRotAngleX: 0
   SyncRotAngleY: 0
   SyncRotAngleZ: 1
@@ -187,7 +189,7 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!50 &2178769682169725733
+--- !u!50 &3228089325012788850
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -208,3 +210,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &341523914784804195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6454784608819902676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

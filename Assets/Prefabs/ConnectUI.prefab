@@ -61,7 +61,6 @@ MonoBehaviour:
   playerPrefabA: {fileID: 27856129085413006, guid: ca37d3ba8d17adf498ac314209a4aa31, type: 3}
   playerPrefabB: {fileID: 6454784608819902676, guid: e80244c638984194e81b44e336946031, type: 3}
   playerPrefabC: {fileID: 7739482684762102170, guid: 7e2da00a965b0534791a4f32bb251c77, type: 3}
-  cheeseNumber: 0
 --- !u!114 &8821820884321633965
 MonoBehaviour:
   m_ObjectHideFlags: 0

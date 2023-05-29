@@ -64,7 +64,7 @@ public class PlayerController : NetworkBehaviour
         {
             //Debug.Log("Default");
             Vector3 destination = wayPoint - transform.position;
-            if (destination.magnitude < 0.3)
+            if (destination.magnitude < 0.5)
             {
                 SetNewDestination();
                 //Debug.Log("New Destination");

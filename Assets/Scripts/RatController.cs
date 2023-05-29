@@ -82,7 +82,7 @@ public class RatController : NetworkBehaviour
             Vector3 direction;
             
             destination = wayPoint - transform.position;
-            if (destination.magnitude < 0.3)
+            if (destination.magnitude < 0.5)
             {
                 SetNewDestination();
             }
