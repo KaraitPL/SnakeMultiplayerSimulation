@@ -17,9 +17,13 @@ public class RatView : NetworkBehaviour
     public bool hasTarget = false;
     public bool cheeseSpotted = false;
     public bool run = false;
+    private bool updateSize = true;
+
+    private Transform transform;
 
     private void Awake()
     {
+        transform = GetComponent<Transform>();
         controller = GetComponent<RatController>();
         targetPosition.Value = transform.position;
     }
@@ -37,7 +41,7 @@ public class RatView : NetworkBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, ray, 4f, mask);
             //Debug.DrawRay(transform.position, ray * 4, new Color(0, 0, 255, 0.10f));  //Rysuje radar
 
-            RaycastHit2D hitTarget = Physics2D.Raycast(transform.position, rayTarget, 0.5f, LayerMask.GetMask("CheeseLayer")); //Ray do zjadania sera (krótki)
+            RaycastHit2D hitTarget = Physics2D.Raycast(transform.position, rayTarget, 0.5f * transform.localScale.x, LayerMask.GetMask("CheeseLayer")); //Ray do zjadania sera (krótki)
 
             if (hit.collider != null)
             {
@@ -75,7 +79,17 @@ public class RatView : NetworkBehaviour
                 if (hitTarget.collider.tag == "Cheese")
                 {
                     if (IsServer)
+                    {
                         hitTarget.collider.GetComponent<RespawnCheese>().DestroyAndSpawn();
+
+                        
+                    }
+                    if (updateSize == true)
+                    {
+                        updateSize = false;
+                        StartCoroutine(MakeBigger());
+                    }
+
                 }
             }
         }
@@ -92,5 +106,12 @@ public class RatView : NetworkBehaviour
         run = true;
         yield return new WaitForSeconds(3);
         run = false;
+    }
+
+    IEnumerator MakeBigger()
+    {
+        yield return new WaitForSeconds(0.1f);
+        transform.localScale = new Vector3(transform.localScale.x + 0.05f, transform.localScale.y + 0.05f, transform.localScale.z);
+        updateSize = true;
     }
 }

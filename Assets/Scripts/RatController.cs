@@ -7,11 +7,15 @@ using UnityEngine.UI;
 public class RatController : NetworkBehaviour
 {
     public NetworkVariable<bool> snakeSeen = new(false, NetworkVariableReadPermission.Everyone,
-       NetworkVariableWritePermission.Server);
+        NetworkVariableWritePermission.Server);
     Vector3 wayPoint;
     RatView ratView;
     [SerializeField] float turnSpeed = 200;
-    [SerializeField] float speed = 2;
+    private float speed = 2;
+    private float currentSpeed = 2f;
+    private float slowSpeed;
+
+    bool updateSize = true;
     
     private void Awake()
     {
@@ -22,22 +26,33 @@ public class RatController : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         transform.position = new Vector3(Random.Range(-20, 20), Random.Range(-10, 10), 0);
+        snakeSeen.Value = false;
     }
 
     private void Update()
     {
+        currentSpeed = 2 / (transform.localScale.x * transform.localScale.x);
+        slowSpeed = currentSpeed / 2;
+        
+
         if (ratView.hasTarget == true && IsServer)
             snakeSeen.Value = true;
         RatMovement();
+        if (updateSize == true)
+        {
+            updateSize = false;
+            StartCoroutine(MakeSmaller());
+        }
     }
 
     void RatMovement()
     {
-        Vector3 rayOriginFront = transform.position + transform.right * 0.45f;
+        Transform transform = GetComponent<Transform>();
+        Vector3 rayOriginFront = transform.position + transform.right * 0.45f * transform.localScale.x;
         for (float angle = -15; angle <= 15; angle++)
         {
             Vector3 rayDirectionFront = Quaternion.Euler(0, 0, angle) * transform.right;
-
+              
             Debug.DrawRay(rayOriginFront, rayDirectionFront * 0.8f, new Color(255, 0, 0, 1f));
             RaycastHit2D hit = Physics2D.Raycast(rayOriginFront, rayDirectionFront, 0.8f, LayerMask.GetMask("RatLayer"));
 
@@ -45,13 +60,13 @@ public class RatController : NetworkBehaviour
             {
                 if (hit.collider.tag == "Rat")
                 {
-                    speed = 1f;
+                    speed = slowSpeed;
                 }
                 else
-                    speed = 2f;
+                    speed = currentSpeed;
             }
             else
-                speed = 2f;
+                speed = currentSpeed;
 
         }
         
@@ -112,5 +127,30 @@ public class RatController : NetworkBehaviour
         wayPoint = new Vector3(Random.Range(-20, 20), Random.Range(-10, 10), 0);
 
     }
+    IEnumerator MakeSmaller()
+    {
+        yield return new WaitForSeconds(2);
+        float size = transform.localScale.x;
+        if (size > 0.75f)
+        {
+            size -= 0.05f;
+            transform.localScale = new Vector3(size, size, transform.localScale.z);
+        }
+        updateSize = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Border")
+        {
+            if (IsServer)
+            {
+                snakeSeen.Value = false;
+                SetNewDestination();
+            }
+        }
+    }
+
+
 
 }

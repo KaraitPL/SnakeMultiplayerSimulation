@@ -13,7 +13,7 @@ public class PlayerController : NetworkBehaviour
     Vector3 oldWayPoint;
     Vector3 newWayPoint;
     [SerializeField] float turnSpeed = 200;
-    [SerializeField] float speed = 0;
+    private float speed = 3;
 
     SnakeHeadView snakeHeadView;
     //private bool seekTarget = false;
@@ -102,4 +102,10 @@ public class PlayerController : NetworkBehaviour
         
 
     }
+
+    public void ChangeSpeed()
+    {
+        speed -= 0.2f;
+    }
+
 }

@@ -63,8 +63,12 @@ public class SnakeHeadView : NetworkBehaviour
             {
                 if (hitTarget.collider.tag == "Rat")
                 {
-                        RatRespawn ratRespawn = hitTarget.collider.GetComponent<RatRespawn>();
-                        ratRespawn.MakeRespawnAction();
+                    RatRespawn ratRespawn = hitTarget.collider.GetComponent<RatRespawn>();
+                    ratRespawn.MakeRespawnAction();
+                    //PlayerLength playerlength = GetComponent<PlayerLength>();
+                    //playerlength.AddLength();
+                    //PlayerController playercontroller = GetComponent<PlayerController>();
+                    //playercontroller.ChangeSpeed();
                     
                         
                     
