@@ -143,6 +143,7 @@ MonoBehaviour:
   hasTarget: 0
   cheeseSpotted: 0
   run: 0
+  disableSnakeView: 0
 --- !u!70 &8908610742882930478
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

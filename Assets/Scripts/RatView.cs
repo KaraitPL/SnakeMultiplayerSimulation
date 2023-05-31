@@ -19,6 +19,8 @@ public class RatView : NetworkBehaviour
     public bool run = false;
     private bool updateSize = true;
 
+    public bool disableSnakeView = false;
+
     private Transform transform;
 
     private void Awake()
@@ -53,7 +55,19 @@ public class RatView : NetworkBehaviour
                     targetSeen = true;
                     if (IsServer)
                     {
-                        targetPosition.Value = transform.position - 2 * (hit.collider.transform.position - transform.position);
+                        
+                        Vector3 destinationPoint = transform.position - 2 * (hit.collider.transform.position - transform.position);
+                        if (destinationPoint.x > 26.5f)
+                            destinationPoint.x = 26.5f;
+                        else if(destinationPoint.x < -26.5f)
+                            destinationPoint.x = -26.5f;
+
+                        if(destinationPoint.y > 15)
+                            destinationPoint.y = 15;
+                        else if(destinationPoint.y < -15)
+                            destinationPoint.y = -15;
+
+                        targetPosition.Value = destinationPoint;
                         controller.SetNewDestination();
                     }
                 }
@@ -114,4 +128,5 @@ public class RatView : NetworkBehaviour
         transform.localScale = new Vector3(transform.localScale.x + 0.05f, transform.localScale.y + 0.05f, transform.localScale.z);
         updateSize = true;
     }
+
 }

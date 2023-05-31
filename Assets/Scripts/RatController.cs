@@ -16,6 +16,8 @@ public class RatController : NetworkBehaviour
     private float slowSpeed;
 
     bool updateSize = true;
+
+    //private bool disableSnakeView = false;
     
     private void Awake()
     {
@@ -33,10 +35,16 @@ public class RatController : NetworkBehaviour
     {
         currentSpeed = 2 / (transform.localScale.x * transform.localScale.x);
         slowSpeed = currentSpeed / 2;
-        
+
 
         if (ratView.hasTarget == true && IsServer)
+        {
+            Debug.Log("Cos serwer robi");
             snakeSeen.Value = true;
+        }
+
+
+
         RatMovement();
         if (updateSize == true)
         {
@@ -68,6 +76,8 @@ public class RatController : NetworkBehaviour
             else
                 speed = currentSpeed;
 
+            
+
         }
         
 
@@ -78,7 +88,10 @@ public class RatController : NetworkBehaviour
             if (destination.magnitude < 0.5)
             {
                 if (IsServer)
+                {
                     snakeSeen.Value = false;
+                    SetNewDestination();
+                }
                 //destination = Vector3.zero;
             }
             Vector3 direction = ratView.targetPosition.Value - transform.position;
@@ -143,13 +156,14 @@ public class RatController : NetworkBehaviour
     {
         if (collision.collider.tag == "Border")
         {
+            //Debug.Log("Elo");
+            //disableSnakeView = true;
             if (IsServer)
-            {
                 snakeSeen.Value = false;
-                SetNewDestination();
-            }
+
         }
     }
+
 
 
 
